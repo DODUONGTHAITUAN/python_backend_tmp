@@ -14,7 +14,8 @@ from .models.user import User
 from .models.product import Product
 from .models.option import Option
 from .models.detail_product import DetailProduct
-
+from .models.line_item import LineItem
+from .models.order import Order
 
 def create_app():
     """Config app"""
