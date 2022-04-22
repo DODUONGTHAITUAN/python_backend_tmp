@@ -17,3 +17,7 @@ Step 7: Run command py ./server.py to run server
 Step 8: Get link http://localhost:8080/ then Open browser and paste link
 
 NOTE: Run pip freeze > requirements.txt --> auto generate file
+
+# Copy all file and create .env file and paste and write email and password
+
+# Note: email: Turn off 2-Step Verification,
