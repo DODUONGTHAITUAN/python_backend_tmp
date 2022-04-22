@@ -1,10 +1,19 @@
+        
 from src import db
-from sqlalchemy import Column, Integer, String, DateTime, func, ForeignKey, Text
-from sqlalchemy.orm import relationship
+from sqlalchemy import (
+    Column,
+    Integer,
+    String,
+    DateTime,
+    func,
+    ForeignKey,
+    LargeBinary,
+    Text
+)
 
 from .product import Product
 from .allcodes import Allcodes
-
+from sqlalchemy.orm import relationship
 
 class Option(db.Model):
     __tablename__ = "Option"
@@ -17,15 +26,19 @@ class Option(db.Model):
     colorID = Column(String(255), ForeignKey(Allcodes.keyMap))
     createdAt = Column(DateTime(timezone=True), server_default=func.now())
     updatedAt = Column(DateTime(timezone=True), server_default=func.now())
+    
+    """ relationship"""
+    productData = relationship(Product,foreign_keys=[productID])
+    colorData = relationship(Allcodes, foreign_keys=[colorID])
 
-    # Define relationship
-    product_data = relationship(Product, foreign_keys=[productID])
-    color_data = relationship(Allcodes, foreign_keys=[colorID])
-
-    def __init__(self, productID, ram, rom, price, image, colorID):
+    def __init__(self,productID,ram,rom,price,image,colorID):
         self.productID = productID
         self.ram = ram
         self.rom = rom
         self.price = price
         self.image = image
         self.colorID = colorID
+        
+    
+    def __repr__(self):
+        return f"<Option {self.optionID}>"
