@@ -20,7 +20,7 @@ class Product(db.Model):
     updatedAt = Column(DateTime(timezone=True), server_default=func.now())
 
     # Relationship
-    #     products = relationship("Product", backref="brand_data", lazy=True)
+    #products = relationship("Product", backref="brand_data", lazy=True)
 
     options = relationship("Option", backref="options_data", lazy=True)
 
