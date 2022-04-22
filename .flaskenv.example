@@ -1,6 +1,4 @@
-PORT=8080
-SQLALCHEMY_DATABASE_URI=mysql://root:@localhost
-DB_NAME=demo
-SECRET_KEY=dev
-FLASK_APP=server
 FLASK_ENV=development
+FLASK_APP=server
+FLASK_RUN_HOST=localhost
+FLASK_RUN_PORT=8080
