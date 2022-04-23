@@ -6,7 +6,9 @@ from src.controllers.user import (
     delete_user_controller,
     get_all_users_controller,
     delete_user_controller,
+    get_user_by_email_controller,
     get_user_by_id_controller,
+    send_mail_code_controller,
     update_user_controller,
 )
 
@@ -24,6 +26,7 @@ DELETE ==> xoas du lieu ==> VD t muon xoa user ==> method delete
 """
 
 
+# [ POST ] create new user
 @user.route("/create", methods=["POST", "GET"])
 def create_user():
     if request.method == "GET":
@@ -33,6 +36,18 @@ def create_user():
     return create_user_controller(data)
 
 
+@user.route("/verify-account", methods=["POST"])
+def verify_account():
+    try:
+        data = request.get_json()
+        print(data)
+        return send_mail_code_controller(data)
+    except Exception as e:
+        print(e)
+        return jsonify({"code": 1, "message": "send mail failure"})
+
+
+# Get all users
 @user.route("/get-users", methods=["GET"])
 def get_all_users():
     try:
@@ -44,9 +59,7 @@ def get_all_users():
         return jsonify({"code": 3, "message": "Error when recieve data from client"})
 
 
-"""Delete user [DELETE]"""
-
-
+#  Delete user
 @user.route("/delete", methods=["DELETE"])
 def delete_user():
     try:
@@ -56,9 +69,7 @@ def delete_user():
         return jsonify({"code": 2, "message": "Error from server"})
 
 
-"""Get user by id user [GET]"""
-
-
+# Get user by id
 @user.route("/get-by-id", methods=["GET"])
 def get_user_by_id():
     try:
@@ -68,9 +79,18 @@ def get_user_by_id():
         return jsonify({"code": 2, "message": "Error from server"})
 
 
-"""Update user by id user [GET]"""
+# Get user by email
+@user.route("/get-by-email", methods=["POST"])
+def get_user_by_email():
+    try:
+        print("Get by email")
+        data = request.get_json()
+        return get_user_by_email_controller(data)
+    except:
+        return jsonify({"code": 4, "message": "Error when get data from client"})
 
 
+#  Update user by id
 @user.route("/update", methods=["PUT"])
 def update_user():
     try:

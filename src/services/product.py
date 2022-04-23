@@ -1,4 +1,5 @@
 from flask import jsonify
+from sqlalchemy import or_
 
 from src.models.product import Product
 
@@ -169,17 +170,20 @@ def create_product_service(data):
 #         return jsonify({"code": 2, "message": "Error from server"})
 
 
-def find_product(id):
+def find_product(id=None, product_name=None):
     """get the fisrt product id that you need to delete"""
     try:
-        product = Product.query.filter_by(id=id).first()
+        # product = Product.query.filter_by(id=id).first()
+        product = Product.query.filter(
+            or_(Product.productName == product_name, Product.id == id)
+        ).first()
         if not product is None:
             return {"isExist": True, "product": product, "Code": 0}
         else:
             return {"isExist": False, "Code": 0}
     except Exception as e:
         print(e)
-        return {"Code": 0, "message": "Some error when get id from database"}
+        return {"Code": 1, "message": "Some error when get id from database"}
 
 
 def delete_product_service(productId):
