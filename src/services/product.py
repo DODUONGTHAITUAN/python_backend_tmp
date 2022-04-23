@@ -228,8 +228,10 @@ def get_product_by_id_service(productId):
         print(response)
         if response["isExist"] and response["Code"] == 0:
             product = format_product(response["product"])
-            return jsonify({"data": product})
-        return jsonify({"code": 1, "message": "Get product unsucessfully"})
+            return jsonify(
+                {"data": product, "code": 0, "message": "Get product successfully"}
+            )
+        return jsonify({"code": 1, "message": "Get product failure"})
     except Exception as e:
         print(e)
         return jsonify({"code": 2, "message": "Error from server"})
