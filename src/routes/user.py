@@ -83,7 +83,6 @@ def get_user_by_id():
 @user.route("/get-by-email", methods=["POST"])
 def get_user_by_email():
     try:
-        print("Get by email")
         data = request.get_json()
         return get_user_by_email_controller(data)
     except:

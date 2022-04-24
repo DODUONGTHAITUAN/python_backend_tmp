@@ -1,5 +1,6 @@
 from src import db
-from sqlalchemy import Column, Integer, String, DateTime, func, ForeignKey, Float
+from sqlalchemy import Column, Integer, String, DateTime, func, ForeignKey, Float, Text
+
 from .user import User
 from .allcodes import Allcodes
 
@@ -14,10 +15,15 @@ class Order(db.Model):
     orderDate = Column(
         DateTime(timezone=True), server_default=func.now(), nullable=True
     )
+    address = Column(Text, nullable=True)
     totalPrice = Column(Float, nullable=True)
     createdAt = Column(DateTime(timezone=True), server_default=func.now())
     updatedAt = Column(DateTime(timezone=True), server_default=func.now())
 
     # Constructor
-    def __init__(self):
-        pass
+    def __init__(self, **args):
+        for key, value in args.items():
+            self.__dict__[key] = value
+
+    def __getitem__(self, key):
+        return self.__dict__[key]
