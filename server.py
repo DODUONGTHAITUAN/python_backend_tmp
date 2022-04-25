@@ -5,10 +5,6 @@ import sys
 sys.dont_write_bytecode = True
 PORT = environ.get("PORT") or 8080
 
-<<<<<<< HEAD
-## alo alo 
-=======
->>>>>>> master
 app = create_app()
 # ahihi
 if __name__ == "__main__":

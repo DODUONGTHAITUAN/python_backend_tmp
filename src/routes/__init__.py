@@ -5,6 +5,8 @@ def routes(app):
     from .allcodes import allcodes
     from .product import product
     from .detail_product import detail_product
+    from .order import order
+    from .line_item import line_item
 
     app.register_blueprint(home, url_prefix="/")
     app.register_blueprint(auth, url_prefix="/auth")
@@ -12,3 +14,5 @@ def routes(app):
     app.register_blueprint(allcodes, url_prefix="/allcodes")
     app.register_blueprint(product, url_prefix="/product")
     app.register_blueprint(detail_product, url_prefix="/detail_product")
+    app.register_blueprint(order, url_prefix="/order")
+    app.register_blueprint(line_item, url_prefix="/line-item")
