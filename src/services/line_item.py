@@ -26,7 +26,8 @@ def create_new_line_item_service(data):
 def create_multiple_line_item_service(data):
     try:
         print(data)
-        for item in data:
+        line_items = data["data"]
+        for item in line_items:
             line_item = get_data_json(item)
             new_line_item = LineItem(**line_item)
             db.session.add(new_line_item)

@@ -7,6 +7,7 @@ from sqlalchemy import (
     ForeignKey,
 )
 
+from sqlalchemy.orm import relationship
 from .order import Order
 from .product import Product
 

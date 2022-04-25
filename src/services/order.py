@@ -14,6 +14,8 @@ def create_new_order_service(data):
 
         # Get current id from order table
         current_id = db.session.query(func.max(Order.id)).scalar()
+        if current_id is None:
+            current_id = 0
 
         #  Add keys to a order dict
         order["id"] = current_id + 1
@@ -43,6 +45,7 @@ def create_new_order_service(data):
 # [ GET ] get order by user id service
 def get_order_by_user_id_service(data):
     try:
+        print({"data": data})
         # Get userid
         userID = data["userID"]
         print({"userId": userID})

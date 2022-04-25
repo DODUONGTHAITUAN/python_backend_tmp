@@ -13,6 +13,7 @@ def format_line_items(data):
 
 def format_line_item(data):
     return {
+        "id": data["id"],
         "orderID": data["orderID"],
         "productID": data["productID"],
         "quantity": data["quantity"],
