@@ -45,15 +45,12 @@ def create_new_order_service(data):
 # [ GET ] get order by user id service
 def get_order_by_user_id_service(data):
     try:
-        print({"data": data})
         # Get userid
         userID = data["userID"]
-        print({"userId": userID})
 
         # Query db
         orders_raw = Order.query.filter_by(userID=userID).all()
         orders = format_orders(orders_raw)
-        print(orders)
         return jsonify(
             {"code": 0, "message": "Get order by user id success", "orders": orders}
         )

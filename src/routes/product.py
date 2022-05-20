@@ -44,7 +44,9 @@ def create_product():
 def delete_product():
     """delete one product"""
     try:
+
         productId = request.args.get("id")
+        print(productId)
         return delete_product_controller(productId)
     except:
         return jsonify({"code": 3, "message": "Can't recieve data from client"})

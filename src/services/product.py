@@ -82,7 +82,7 @@ def create_product_service(data):
     try:
         # get data from client
         productName = data["productName"]
-        image = data["image"]
+        image = data["imageLink"]
         cpu = data["cpu"]
         gpu = data["gpu"]
         productDate = data["productDate"]
@@ -101,12 +101,12 @@ def create_product_service(data):
             return jsonify({"code": 1, "message": "Missing required param"})
 
         # create a new product
-        newProduct = Product(productName, image, cpu, gpu, productDate, origin)
+        newProduct = Product(productName, image, cpu, gpu, productDate, origin, brandID)
         db.session.add(newProduct)
         db.session.commit()
         return jsonify({"code": 0, "message": "product has created"})
     except Exception as e:
-        print(e)
+        print("Create Product Service: ", e)
         return jsonify({"code": 2, "message": "Error from server"})
 
 
@@ -189,9 +189,9 @@ def find_product(id=None, product_name=None):
 def delete_product_service(productId):
     """Delete one product in database with provided Id"""
     try:
-        print(productId)
         response = find_product(productId)
-        if response["isExist"] and response["code"] == 0:
+        print(response)
+        if response["isExist"] and response["Code"] == 0:
             db.session.delete(response["product"])
             db.session.commit()
             return jsonify({"code": 0, "message": "Delete product successfully"})
